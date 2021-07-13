@@ -20,11 +20,15 @@ const tasks = [
   }
 ];
 
-const showTask = () => {
+const showTask = (tasks) => {
   tasks.forEach(e => {
   const task = document.createElement('div');
   task.innerHTML = `
-  <div class="mini-section">${e.description}</div>
+  
+  <div class="mini-section item">
+  <input type="checkbox" id="task-description" name="task-description" value="${e.index}">${e.description}
+  <i class="fas fa-ellipsis-v" style="color: gray; float: right;"></i>
+  </div>
   `;
 
   tasksList.appendChild(task);
