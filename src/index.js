@@ -11,12 +11,12 @@ const tasks = [
   {
     index: 2,
     description: "Go to school",
-    completed: true
+    completed: false
   },
   {
     index: 3,
     description: "Sleep",
-    completed: true
+    completed: false
   }
 ];
 
