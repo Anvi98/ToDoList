@@ -1,3 +1,30 @@
 body {
-  background-color: bisque;
+  background-color: #eee;
+}
+
+.wrapper {
+  background-color: #fff;
+  width: 30%;
+  margin: 100px auto;
+  border: 1px solid #eee;
+  padding: 5px 0;
+  box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+
+.wrapper p {
+  margin: 0;
+  font-size: 20px;
+}
+
+.mini-section{
+  border-bottom: 1px solid rgb(224, 224, 224);
+  margin: 5px 0;
+  padding: 10px;
+}
+
+.task {
+  border: none;
+  font-style: italic;
+  width: 250px;
+  padding: 8px;
 }
