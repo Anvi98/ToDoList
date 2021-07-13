@@ -51,9 +51,9 @@ In order to see the live demo and use the program please run the following comma
 
 👤 **Anvi Alex**
 
-- GitHub: [Anvi](https://github.com/Anvi98)
-- Twitter: [MontanholiNunes](https://twitter.com/anvi_al)
-- LinkedIn: [Joao vitor montanholi](https://www.linkedin.com/in/anvi-alex-eponon/)
+- GitHub: [Anvi Alex](https://github.com/Anvi98)
+- Twitter: [Anvi Alex](https://twitter.com/anvi_al)
+- LinkedIn: [Anvi Alex](https://www.linkedin.com/in/anvi-alex-eponon/)
 
 ## 🤝 Contributing
 
