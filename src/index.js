@@ -1,13 +1,35 @@
 import _ from 'lodash';
 import './style.css';
 
-function component() {
-  const element = document.createElement('div');
+const tasksList = document.querySelector('.tasksList');
+const tasks = [
+  {
+    index: 1,
+    description: "Wash my teeth",
+    completed: true
+  },
+  {
+    index: 2,
+    description: "Go to school",
+    completed: true
+  },
+  {
+    index: 3,
+    description: "Sleep",
+    completed: true
+  }
+];
 
-  // Lodash, imported
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+const showTask = () => {
+  tasks.forEach(e => {
+  const task = document.createElement('div');
+  task.innerHTML = `
+  <div class="mini-section">${e.description}</div>
+  `;
 
-  return element;
-}
+  tasksList.appendChild(task);
+});
 
-document.body.appendChild(component());
+};
+
+showTask(tasks);
