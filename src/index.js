@@ -26,7 +26,7 @@ const showTask = (tasks) => {
   task.innerHTML = `
   
   <div class="mini-section item">
-  <input type="checkbox" id="task-description" name="task-description" value="${e.index}">${e.description}
+  <input class="check" type="checkbox" id="task-description" name="task-description" value="${e.index}">${e.description}
   <i class="fas fa-ellipsis-v" style="color: gray; float: right;"></i>
   </div>
   `;
