@@ -1,6 +1,6 @@
 import './style.css';
 
-const tasksList = document.querySelector('.tasksList');
+const container = document.querySelector('.container');
 const tasks = [
   {
     index: 1,
@@ -24,14 +24,22 @@ const showTask = (tasks) => {
     const task = document.createElement('div');
     task.innerHTML = `
   
-    <div class="mini-section item">
+    <div class="mini-section item" draggable = "true">
     <input class="check" type="checkbox" id="task-description" name="task-description" value="${e.index}">${e.description}
     <i class="fas fa-ellipsis-v" style="color: gray; float: right;"></i>
     </div>
     `;
 
-    tasksList.appendChild(task);
+    container.appendChild(task);
   });
 };
 
 showTask(tasks);
+
+const items = document.querySelectorAll('.item');
+
+items.forEach(item => {
+  item.addEventListener('dragstart', ()=>{
+    console.log('drag start');
+  })
+});
