@@ -72,3 +72,11 @@ i {
   width: 10px;
   margin: 0 10px;
 }
+
+.dragging {
+  opacity: 0.5;
+}
+
+.ellipsis {
+  cursor: move;
+}
