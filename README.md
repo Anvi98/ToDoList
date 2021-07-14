@@ -45,9 +45,11 @@ With the repository already cloned into your local machine you need to run the f
 
 In order to see the live demo and use the program please run the following command:
 
-```npm start```
+```npm run build```
 
-## Authors
+```npm run serve```
+
+## Author
 
 👤 **Anvi Alex**
 
