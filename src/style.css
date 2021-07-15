@@ -60,6 +60,7 @@ i {
 }
 
 .item {
+  padding: 1rem;
   background-color: rgb(247, 247, 247);
 }
 
@@ -71,4 +72,8 @@ i {
 .check {
   width: 10px;
   margin: 0 10px;
+}
+
+.dragging {
+  opacity: 0.5;
 }
