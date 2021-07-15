@@ -72,6 +72,11 @@ i {
 .check {
   width: 10px;
   margin: 0 10px;
+
+}
+
+.desc {
+  text-decoration: line-through;
 }
 
 .dragging {
