@@ -5,10 +5,13 @@ import {
   dragOver,
   tasks,
 } from './dragDrop.js';
+import { inputListener } from './dragDrop.js';
 import './style.css';
 import { getContainer } from './status.js';
 
-const tasksList = document.querySelector('.tasksList');
+export const tasksList = document.querySelector('.tasksList');
+const task = document.querySelector('.task');
+
 const showTask = (tasks) => {
   tasks.forEach((e) => {
     const task = document.createElement('div');
@@ -29,6 +32,7 @@ showTask(tasks);
 getContainer(tasksList);
 const items = document.querySelectorAll('.item');
 
+inputListener(task);
 addListeners(items);
 dragOver(tasksList);
 reloadContainer(items);

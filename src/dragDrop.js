@@ -1,5 +1,7 @@
 // Initials tasks
 /* eslint-disable import/no-mutable-exports */
+import { tasksList } from ".";
+
 export let tasks = [
   {
     index: 1,
@@ -18,6 +20,14 @@ export let tasks = [
   },
 ];
 
+class Task {
+  constructor(index, description, completed) {
+    this.index = index;
+    this.description = description;
+    this.completed = completed;
+  }
+}
+
 // Add Drag-start and drag-End listeners --- Add Css Class
 const addListeners = (elements) => {
   elements.forEach((item) => {
@@ -30,6 +40,29 @@ const addListeners = (elements) => {
     });
   });
 };
+
+const addTask = (task) => {
+  console.log(tasksList.length);
+  const newTask = document.createElement('div');
+  newTask.classList.add('mini-section');
+  newTask.classList.add('item');
+  newTask.setAttribute('draggable', 'true');
+  newTask.innerHTML = `
+  <span>
+  <input class='check' type='checkbox' id='task-description' name='task-description' value='${task}'>${task}
+  <i class="fas fa-ellipsis-v" style="color: gray; float: right;"></i>
+  </span>
+  `;
+  tasksList.appendChild(newTask);
+} 
+
+export const inputListener = (input) => {
+  input.addEventListener('keypress', (e) => {
+    if(e.key == 'Enter'){
+      addTask(input.value);
+    }
+  });
+}
 
 /// Code for local Storage Save.
 
