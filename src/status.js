@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { saveChanges } from './dragDrop.js';
 
 // Checks if input are checked or not, and Add Or remove Css Class => The line through style.

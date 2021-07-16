@@ -1,4 +1,5 @@
 // Initials tasks
+/* eslint-disable import/no-mutable-exports */
 export let tasks = [
   {
     index: 1,
