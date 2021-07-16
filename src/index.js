@@ -4,6 +4,7 @@ import {
   addListeners,
   dragOver,
   tasks,
+  editListener,
 } from './dragDrop.js';
 import { inputListener } from './dragDrop.js';
 import './style.css';
@@ -30,9 +31,10 @@ export const showTask = (tasks) => {
 
 showTask(tasks);
 getContainer(tasksList);
-const items = document.querySelectorAll('.item');
+export const items = document.querySelectorAll('.item');
 
 inputListener(task);
+editListener();
 addListeners(items);
 dragOver(tasksList);
 reloadContainer(items);

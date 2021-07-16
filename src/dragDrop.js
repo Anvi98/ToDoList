@@ -1,6 +1,6 @@
 // Initials tasks
 /* eslint-disable import/no-mutable-exports */
-import { tasksList, showTask } from ".";
+import { tasksList, showTask, items } from ".";
 import { getContainer } from "./status";
 
 export let tasks = [];
@@ -28,14 +28,6 @@ if (localStorage.getItem('tasks')) {
     },
   ];
   
-}
-
-class Task {
-  constructor(index, description, completed) {
-    this.index = index;
-    this.description = description;
-    this.completed = completed;
-  }
 }
 
 // Add Drag-start and drag-End listeners --- Add Css Class
@@ -137,6 +129,24 @@ export const dragOver = (container) => {
     } else {
       container.insertBefore(draggable, afterElement);
     }
+  });
+};
+
+export const editListener = () => {
+  items.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      const newInput = document.createElement('input');
+      const oldValue = e.target.firstChild.nextSibling.firstChild.nextSibling.value;
+
+      e.target.removeChild(e.target.firstChild.nextSibling);
+      newInput.placeholder = oldValue;
+      e.target.insertBefore(newInput, e.target.firstChild.nextSibling);
+      console.log(oldValue);
+
+      newInput.addEventListener('keypress', (e) => {
+        
+      });
+    });
   });
 };
 
