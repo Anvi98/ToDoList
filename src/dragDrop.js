@@ -42,7 +42,7 @@ const addListeners = (elements) => {
 };
 
 const addTask = (task) => {
-  console.log(tasksList.length);
+  console.log([...tasksList.length]);
   const newTask = document.createElement('div');
   newTask.classList.add('mini-section');
   newTask.classList.add('item');
