@@ -12,7 +12,7 @@ import { getContainer } from './status.js';
 export const tasksList = document.querySelector('.tasksList');
 const task = document.querySelector('.task');
 
-const showTask = (tasks) => {
+export const showTask = (tasks) => {
   tasks.forEach((e) => {
     const task = document.createElement('div');
     task.classList.add('mini-section');

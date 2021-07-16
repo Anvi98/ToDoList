@@ -1,24 +1,34 @@
 // Initials tasks
 /* eslint-disable import/no-mutable-exports */
-import { tasksList } from ".";
+import { tasksList, showTask } from ".";
+import { getContainer } from "./status";
 
-export let tasks = [
-  {
-    index: 1,
-    description: 'brush my teeth',
-    completed: true,
-  },
-  {
-    index: 2,
-    description: 'Go to school',
-    completed: false,
-  },
-  {
-    index: 3,
-    description: 'Sleep',
-    completed: false,
-  },
-];
+export let tasks = [];
+
+if (localStorage.getItem('tasks')) {
+  const getList = JSON.parse(localStorage.getItem('tasks'));
+  tasks = getList;
+} else {
+
+  tasks = [
+    {
+      index: 1,
+      description: 'brush my teeth',
+      completed: true,
+    },
+    {
+      index: 2,
+      description: 'Go to school',
+      completed: false,
+    },
+    {
+      index: 3,
+      description: 'Sleep',
+      completed: false,
+    },
+  ];
+  
+}
 
 class Task {
   constructor(index, description, completed) {
@@ -42,7 +52,7 @@ const addListeners = (elements) => {
 };
 
 const addTask = (task) => {
-  console.log([...tasksList.length]);
+  console.log(tasks.length);
   const newTask = document.createElement('div');
   newTask.classList.add('mini-section');
   newTask.classList.add('item');
@@ -54,6 +64,9 @@ const addTask = (task) => {
   </span>
   `;
   tasksList.appendChild(newTask);
+  saveChanges();
+  saveLocalstorage(tasks);
+  document.location.reload(true);
 } 
 
 export const inputListener = (input) => {
@@ -65,11 +78,6 @@ export const inputListener = (input) => {
 }
 
 /// Code for local Storage Save.
-
-if (localStorage.getItem('tasks')) {
-  const getList = JSON.parse(localStorage.getItem('tasks'));
-  tasks = getList;
-}
 
 export const saveLocalstorage = () => {
   localStorage.setItem('tasks', JSON.stringify(tasks));
