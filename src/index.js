@@ -1,35 +1,34 @@
-import _ from 'lodash';
+/* eslint-disable import/prefer-default-export */
+import {
+  reloadContainer,
+  addListeners,
+  dragOver,
+  tasks,
+} from './dragDrop.js';
 import './style.css';
+import { getContainer } from './status.js';
 
 const tasksList = document.querySelector('.tasksList');
-const tasks = [
-  {
-    index: 1,
-    description: "Wash my teeth",
-    completed: true
-  },
-  {
-    index: 2,
-    description: "Go to school",
-    completed: true
-  },
-  {
-    index: 3,
-    description: "Sleep",
-    completed: true
-  }
-];
-
-const showTask = () => {
-  tasks.forEach(e => {
-  const task = document.createElement('div');
-  task.innerHTML = `
-  <div class="mini-section">${e.description}</div>
-  `;
-
-  tasksList.appendChild(task);
-});
-
+const showTask = (tasks) => {
+  tasks.forEach((e) => {
+    const task = document.createElement('div');
+    task.classList.add('mini-section');
+    task.classList.add('item');
+    task.setAttribute('draggable', 'true');
+    task.innerHTML = `
+    <span>
+    <input class='check' type='checkbox' id='task-description' name='task-description' value='${e.description}'>${e.description}
+    <i class="fas fa-ellipsis-v" style="color: gray; float: right;"></i>
+    </span>
+    `;
+    tasksList.appendChild(task);
+  });
 };
 
 showTask(tasks);
+getContainer(tasksList);
+const items = document.querySelectorAll('.item');
+
+addListeners(items);
+dragOver(tasksList);
+reloadContainer(items);
