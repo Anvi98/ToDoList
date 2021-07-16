@@ -1,9 +1,23 @@
+// Initials tasks 
+export let tasks = [
+  {
+    index: 1,
+    description: 'brush my teeth',
+    completed: true,
+  },
+  {
+    index: 2,
+    description: 'Go to school',
+    completed: false,
+  },
+  {
+    index: 3,
+    description: 'Sleep',
+    completed: false,
+  },
+];
 
-import {getContainer} from './status';
-
-let container = document.querySelector('.tasksList');
-
-
+// Add Drag-start and drag-End listeners --- Add Css Class
 const addListeners = (elements) => {
   elements.forEach(item =>{
     item.addEventListener('dragstart', ()=>{
@@ -11,13 +25,37 @@ const addListeners = (elements) => {
 
       item.addEventListener('dragend', ()=>{
         item.classList.remove('dragging');
-        let a = [...container.querySelectorAll('input')];
-        console.log(Array.prototype.indexOf.call(item.parentElement, item));
       });
     });
   });
 };
 
+// Help save any changes in real time (Save position after DragDrop, check and unchecked, add, delete etc...)
+//----------------------
+export const reloadContainer = (elements) => {
+  elements.forEach(item => {
+    item.addEventListener('drop', (e)=>{
+      saveChanges();
+    });
+  });
+}
+
+export const saveChanges = () =>{
+  const newList = [];
+  const listTasks = document.querySelectorAll('.item');
+  for (let i = 0; i < listTasks.length; i += 1) {
+    newList.push({
+    index: i + 1,
+    description: listTasks[i].firstChild.nextSibling.firstChild.nextSibling.value,
+    completed: listTasks[i].firstChild.nextSibling.firstChild.nextSibling.checked
+  });
+  
+  tasks = newList;
+  saveLocalstorage(tasks);
+}
+}
+// ----------------
+// Add event listener DragOver to dragzone
 export const dragOver = (container) => {
   container.addEventListener('dragover', (e)=>{
     e.preventDefault();
@@ -28,10 +66,10 @@ export const dragOver = (container) => {
     } else {
       container.insertBefore(draggable, afterElement);
     }
-    getContainer(container);
   });
-}
+};
 
+// Get the element just after the location of the mouse
 export const getDragAfterElement = (container, y) => {
   const draggableElements = [...container.querySelectorAll('.item:not(.dragging)')];
 
@@ -47,21 +85,15 @@ export const getDragAfterElement = (container, y) => {
   }, {offset: Number.NEGATIVE_INFINITY}).element;
 };
 
-export const getTodoList = () => {
-  let tasks;
-  if (localStorage.getItem('tasks') != null) {
-    tasks = JSON.parse(localStorage.getItem('tasks'));
-  } else {
-    tasks = [];
-  }
-  return tasks;
-};
+/// Code for local Storage Save.
 
-export const setBook = (task) => {
-  const tasks = getTodoData();
-  tasks.push(task);
-  tasksList = tasks;
-  localStorage.setItem('tasks', JSON.stringify(tasksList));
+if (localStorage.getItem('tasks')) {
+  const getList = JSON.parse(localStorage.getItem('tasks'));
+  tasks = getList;
+}
+
+export const saveLocalstorage = () => {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 
 export {addListeners};
