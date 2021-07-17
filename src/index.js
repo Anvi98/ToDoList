@@ -6,7 +6,6 @@ import {
   tasks,
   editListener,
   deleteAll,
-  saveChanges,
 } from './dragDrop.js';
 import { inputListener } from './dragDrop.js';
 import './style.css';
