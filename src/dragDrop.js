@@ -1,22 +1,17 @@
 // Initials tasks
-/* eslint-disable import/no-mutable-exports */
-export let tasks = [
-  {
-    index: 1,
-    description: 'brush my teeth',
-    completed: true,
-  },
-  {
-    index: 2,
-    description: 'Go to school',
-    completed: false,
-  },
-  {
-    index: 3,
-    description: 'Sleep',
-    completed: false,
-  },
-];
+/* eslint-disable import/no-mutable-exports,  */
+/* eslint-disable import/no-cycle */
+/* eslint-disable no-loop-func */
+
+import { clearAll } from './index.js';
+import addTask from './addTask.js';
+
+export let tasks = [];
+
+if (localStorage.getItem('tasks')) {
+  const getList = JSON.parse(localStorage.getItem('tasks'));
+  tasks = getList;
+}
 
 // Add Drag-start and drag-End listeners --- Add Css Class
 const addListeners = (elements) => {
@@ -33,11 +28,6 @@ const addListeners = (elements) => {
 
 /// Code for local Storage Save.
 
-if (localStorage.getItem('tasks')) {
-  const getList = JSON.parse(localStorage.getItem('tasks'));
-  tasks = getList;
-}
-
 export const saveLocalstorage = () => {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 };
@@ -48,16 +38,29 @@ export const saveLocalstorage = () => {
 export const saveChanges = () => {
   const newList = [];
   const listTasks = document.querySelectorAll('.item');
-  for (let i = 0; i < listTasks.length; i += 1) {
-    newList.push({
-      index: i + 1,
-      description: listTasks[i].firstChild.nextSibling.firstChild.nextSibling.value,
-      completed: listTasks[i].firstChild.nextSibling.firstChild.nextSibling.checked,
-    });
-
-    tasks = newList;
+  if (listTasks.length === 0) {
+    tasks = [];
     saveLocalstorage(tasks);
+  } else {
+    for (let i = 0; i < listTasks.length; i += 1) {
+      newList.push({
+        index: i + 1,
+        description: listTasks[i].firstChild.nextSibling.firstChild.nextSibling.value,
+        completed: listTasks[i].firstChild.nextSibling.firstChild.nextSibling.checked,
+      });
+
+      tasks = newList;
+      saveLocalstorage(tasks);
+    }
   }
+};
+
+export const inputListener = (input) => {
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      addTask(input.value);
+    }
+  });
 };
 
 export const reloadContainer = (elements) => {
@@ -96,6 +99,15 @@ export const dragOver = (container) => {
     } else {
       container.insertBefore(draggable, afterElement);
     }
+  });
+};
+
+export const deleteAll = () => {
+  clearAll.addEventListener('click', (e) => {
+    e.preventDefault();
+    tasks = tasks.filter((task) => task.completed === false);
+    saveLocalstorage();
+    document.location.reload(true);
   });
 };
 
