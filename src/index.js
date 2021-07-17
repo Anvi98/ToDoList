@@ -1,4 +1,7 @@
 /* eslint-disable import/prefer-default-export */
+/* eslint-disable import/no-cycle */
+/* eslint-disable import/no-duplicates */
+
 import {
   reloadContainer,
   addListeners,
@@ -21,7 +24,7 @@ export const showTask = (tasks) => {
     task.classList.add('mini-section');
     task.classList.add('item');
     task.setAttribute('draggable', 'true');
-    if(e.completed === true){
+    if (e.completed === true) {
       task.innerHTML = `
       <span class='desc'>
       <input class='check' type='checkbox' id='task-description' name='task-description' value='${e.description}' checked = true>${e.description}</input>
@@ -34,7 +37,7 @@ export const showTask = (tasks) => {
       <input class='check' type='checkbox' id='task-description' name='task-description' value='${e.description}'>${e.description}</input>
       <i class="fas fa-ellipsis-v ellipsis" style="color: gray; float: right;"></i>
       </span>
-      `; 
+      `;
     }
 
     tasksList.appendChild(task);
