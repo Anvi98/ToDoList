@@ -94,3 +94,11 @@ i {
 .invalid {
   outline-color: rgb(241, 198, 198);
 }
+
+.clear-all:hover {
+  cursor: pointer;
+}
+
+.ellipsis:hover {
+  cursor: move;
+}

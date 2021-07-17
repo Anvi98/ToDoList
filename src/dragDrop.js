@@ -1,6 +1,6 @@
 // Initials tasks
 /* eslint-disable import/no-mutable-exports */
-import { tasksList, showTask, items } from ".";
+import { tasksList, showTask, items, clearAll } from ".";
 import { getContainer } from "./status";
 
 export let tasks = [];
@@ -32,7 +32,7 @@ const addTask = (task) => {
   newTask.innerHTML = `
   <span>
   <input class='check' type='checkbox' id='task-description' name='task-description' value='${task}'>${task}
-  <i class="fas fa-ellipsis-v" style="color: gray; float: right;"></i>
+  <i class="fas fa-ellipsis-v ellipsis" style="color: gray; float: right;"></i>
   </span>
   `;
   tasksList.appendChild(newTask);
@@ -61,16 +61,22 @@ export const saveLocalstorage = () => {
 export const saveChanges = () => {
   const newList = [];
   const listTasks = document.querySelectorAll('.item');
-  for (let i = 0; i < listTasks.length; i += 1) {
-    newList.push({
-      index: i + 1,
-      description: listTasks[i].firstChild.nextSibling.firstChild.nextSibling.value,
-      completed: listTasks[i].firstChild.nextSibling.firstChild.nextSibling.checked,
-    });
-
-    tasks = newList;
+  if(listTasks.length === 0){
+    tasks = [];
     saveLocalstorage(tasks);
+  } else {
+    for (let i = 0; i < listTasks.length; i += 1) {
+      newList.push({
+        index: i + 1,
+        description: listTasks[i].firstChild.nextSibling.firstChild.nextSibling.value,
+        completed: listTasks[i].firstChild.nextSibling.firstChild.nextSibling.checked,
+      });
+  
+      tasks = newList;
+      saveLocalstorage(tasks);
+    }
   }
+
 };
 
 export const reloadContainer = (elements) => {
@@ -139,7 +145,7 @@ export const editListener = () => {
 
            items[i].firstChild.nextSibling.innerHTML = `
            <input class='check' type='checkbox' id='task-description' name='task-description' value='${newInput.value}'>${newInput.value}
-           <i class="fas fa-ellipsis-v" style="color: gray; float: right;"></i>
+           <i class="fas fa-ellipsis-v ellipsis" style="color: gray; float: right;"></i>
           `;
           tasks[i].description = newInput.value;
           tasks[i].completed = false;
@@ -158,5 +164,16 @@ export const editListener = () => {
 
   };
 };
+
+export const deleteAll = () => {
+  clearAll.addEventListener('click', (e) => {
+    e.preventDefault();
+    tasks = tasks.filter(task => task.completed === false);
+    saveLocalstorage();
+    document.location.reload(true);
+    });
+
+}
+
 
 export { addListeners };
