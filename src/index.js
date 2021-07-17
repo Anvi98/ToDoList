@@ -21,7 +21,7 @@ export const showTask = (tasks) => {
     task.setAttribute('draggable', 'true');
     task.innerHTML = `
     <span>
-    <input class='check' type='checkbox' id='task-description' name='task-description' value='${e.description}'>${e.description}
+    <input class='check' type='checkbox' id='task-description' name='task-description' value='${e.description}'>${e.description}</input>
     <i class="fas fa-ellipsis-v" style="color: gray; float: right;"></i>
     </span>
     `;

@@ -8,26 +8,6 @@ export let tasks = [];
 if (localStorage.getItem('tasks')) {
   const getList = JSON.parse(localStorage.getItem('tasks'));
   tasks = getList;
-} else {
-
-  tasks = [
-    {
-      index: 1,
-      description: 'brush my teeth',
-      completed: true,
-    },
-    {
-      index: 2,
-      description: 'Go to school',
-      completed: false,
-    },
-    {
-      index: 3,
-      description: 'Sleep',
-      completed: false,
-    },
-  ];
-  
 }
 
 // Add Drag-start and drag-End listeners --- Add Css Class
@@ -133,21 +113,50 @@ export const dragOver = (container) => {
 };
 
 export const editListener = () => {
-  items.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      const newInput = document.createElement('input');
-      const oldValue = e.target.firstChild.nextSibling.firstChild.nextSibling.value;
+  for(let i = 0; i < items.length; i+=1) {
+    items[i].addEventListener('dblclick', (e) => {
 
-      e.target.removeChild(e.target.firstChild.nextSibling);
-      newInput.placeholder = oldValue;
-      e.target.insertBefore(newInput, e.target.firstChild.nextSibling);
-      console.log(oldValue);
+      const oldValue = items[i].children[0].children[0];
+      items[i].firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.remove();
+      items[i].firstChild.nextSibling.firstChild.nextSibling.nextSibling.remove();
+      const newInput = document.createElement('input');
+      const icon = document.createElement('i');
+      icon.classList.add('fa', 'fa-trash', 'trash');
+      items[i].firstChild.nextSibling.removeChild(items[i].firstChild.nextSibling.firstChild.nextSibling);
+      newInput.placeholder = oldValue.value;
+      items[i].firstChild.nextSibling.insertBefore(newInput, items[i].firstChild.nextSibling.firstChild.nextSibling);
+      items[i].firstChild.nextSibling.insertBefore(icon, items[i].firstChild.nextSibling.firstChild.nextSiblin);
 
       newInput.addEventListener('keypress', (e) => {
-        
+        if(e.key == 'Enter'){
+          if(newInput.value.trim() == ''){
+            newInput.classList.add('invalid');
+          } else {
+           items[i].children[0].id = i ;
+           newInput.setAttribute('description', newInput.value);
+           items[i].firstChild.nextSibling.removeChild(items[i].firstChild.nextSibling.firstChild.nextSibling);
+
+
+           items[i].firstChild.nextSibling.innerHTML = `
+           <input class='check' type='checkbox' id='task-description' name='task-description' value='${newInput.value}'>${newInput.value}
+           <i class="fas fa-ellipsis-v" style="color: gray; float: right;"></i>
+          `;
+          tasks[i].description = newInput.value;
+          tasks[i].completed = false;
+          saveChanges();
+          document.location.reload(true);
+          }
+        }
       });
-    });
-  });
+
+      icon.addEventListener('click', (e) => {
+        e.target.parentElement.parentElement.remove();
+        saveChanges();
+        document.location.reload(true);
+      });
+    })
+
+  };
 };
 
 export { addListeners };

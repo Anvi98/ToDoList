@@ -82,6 +82,15 @@ i {
   opacity: 0.5;
 }
 
-.hidden {
-  display: none;
+.trash {
+  float: right;
+}
+
+.trash:hover {
+  cursor: pointer;
+  color: rgb(241, 198, 198);
+}
+
+.invalid {
+  outline-color: rgb(241, 198, 198);
 }
