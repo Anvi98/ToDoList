@@ -7,12 +7,12 @@ import {
   addListeners,
   dragOver,
   tasks,
-  editListener,
   deleteAll,
 } from './dragDrop.js';
 import { inputListener } from './dragDrop.js';
 import './style.css';
 import { getContainer } from './status.js';
+import editListener from './editTask.js';
 
 export const tasksList = document.querySelector('.tasksList');
 export const clearAll = document.querySelector('.clear-all');

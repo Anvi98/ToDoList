@@ -1,7 +1,8 @@
-import { tasks, saveChanges, saveLocalstorage } from "./dragDrop";
-import { tasksList } from "./index.js";
+/* eslint-disable import/no-cycle */
+import { tasks, saveChanges, saveLocalstorage } from './dragDrop.js';
+import { tasksList } from './index.js';
 
-export const addTask = (task) => {
+export default function addTask(task) {
   const newTask = document.createElement('div');
   newTask.classList.add('mini-section');
   newTask.classList.add('item');
@@ -16,4 +17,4 @@ export const addTask = (task) => {
   saveChanges();
   saveLocalstorage(tasks);
   document.location.reload(true);
-};
+}
