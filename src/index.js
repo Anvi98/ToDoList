@@ -53,4 +53,5 @@ editListener();
 addListeners(items);
 dragOver(tasksList);
 reloadContainer(items);
+console.log(typeof tasksList.lastChild.textContent);
 deleteAll();

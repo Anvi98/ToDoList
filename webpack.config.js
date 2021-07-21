@@ -3,7 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    drag: './src/dragDrop.js',
+    edit: './src/editTask.js',
+    status: './src/status.js',
+    addTask: './src/addTask.js',
+  },
 
   plugins: [
     new HtmlWebpackPlugin({
@@ -12,8 +18,11 @@ module.exports = {
   ],
 
   output: {
-    filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[hash:8].js',
+    sourceMapFilename: '[name].[hash:8].map',
+    chunkFilename: '[id].[hash:8].js',
+    clean: true,
   },
 
   devServer: {
