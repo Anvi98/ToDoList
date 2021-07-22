@@ -9,6 +9,7 @@ module.exports = {
     edit: './src/editTask.js',
     status: './src/status.js',
     addTask: './src/addTask.js',
+    style:'./src/style.css',
   },
 
   plugins: [

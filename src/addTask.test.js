@@ -1,4 +1,4 @@
-const addTask = require('./addTask');
+import addTask from './addTask.js';
 
 describe('Add new test on AddTask', ()=>{
   test('Test 1', ()=> {
