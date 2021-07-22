@@ -81,3 +81,24 @@ i {
 .dragging {
   opacity: 0.5;
 }
+
+.trash {
+  float: right;
+}
+
+.clear-all:hover,
+.trash:hover {
+  cursor: pointer
+}
+
+.trash:hover {
+  color: rgb(241, 198, 198);
+}
+
+.invalid {
+  outline-color: rgb(241, 198, 198);
+}
+
+.ellipsis:hover {
+  cursor: move;
+}
